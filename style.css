@@ -28,7 +28,7 @@ body {
 
 .wrapper {
     padding: 25px 0;
-    margin: 140px auto;
+    margin: 70px auto;
     max-width: 420px;
     background-color: var(--light-background);
     border-radius: 8px;
@@ -175,6 +175,11 @@ li {
 
 .task-item label {
     display: flex;
+}
+
+.task-item label p {
+    overflow-wrap: break-word;
+    max-width: 300px;
 }
 
 .task-item input {
