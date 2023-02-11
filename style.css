@@ -222,4 +222,8 @@ li {
     text-decoration: line-through;
 }
 
+.hidden {
+    display: none;
+}
+
 /* End task box input */

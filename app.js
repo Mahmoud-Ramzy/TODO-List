@@ -3,6 +3,9 @@ let taskBox = document.querySelector(".task-box");
 let clearBTN = document.querySelector(".clear-btn");
 let todos = JSON.parse(localStorage.getItem("todo-list"));
 
+let editID;
+let isEdited = false;
+
 function showTODO() {
   let li = "";
   document.getElementById("all").classList.add("active");
@@ -14,6 +17,7 @@ function showTODO() {
   if (todos) {
     todos.forEach((todo, id) => {
       let Pclass = todo.state === "completed" ? "checked" : "";
+      let edit = todo.state === "completed" ? "hidden" : "";
       li += `
             <li class="task-item">
                 <label for="${id}">
@@ -27,8 +31,8 @@ function showTODO() {
                 <div class="dot3"></div>
                 </div>
                 <ul class="task-menu">
-                <li>Edit</li>
-                <li onclick="Delete(this)">Delete</li>
+                <li class="${edit}" onclick="Edit(${id},'${todo.name}')">Edit</li>
+                <li onclick="Delete(${id})">Delete</li>
                 </ul>
                 </div>
             </li>
@@ -96,6 +100,7 @@ function showWaited(State) {
   if (todos) {
     todos.forEach((todo, id) => {
       let Pclass = todo.state === "completed" ? "checked" : "";
+      let edit = todo.state === "completed" ? "hidden" : "";
       let waited = todo.state;
       if (waited === State) {
         li += `
@@ -111,8 +116,8 @@ function showWaited(State) {
         <div class="dot3"></div>
         </div>
         <ul class="task-menu">
-        <li>Edit</li>
-        <li Delete(this)>Delete</li>
+        <li  class="${edit}" onclick="Edit(${id},'${todo.name}')">Edit</li>
+        <li onclick="Delete(${id})">Delete</li>
         </ul>
         </div>
         </li>
@@ -122,22 +127,13 @@ function showWaited(State) {
   }
   taskBox.innerHTML = li;
 }
-function Delete(item) {
-  let taskName =
-    item.parentElement.parentElement.parentElement.firstElementChild
-      .firstElementChild;
+function Edit(itemID, itemName) {
+  inp.value = itemName;
+  Delete(itemID);
+}
 
-  todos.splice(taskName.id, 1);
-  // deleteitem(todos, taskName.id);
-  console.log(todos);
+function Delete(itemID) {
+  todos.splice(itemID, 1);
   localStorage.setItem("todo-list", JSON.stringify(todos));
   showTODO();
-}
-function deleteitem(arr, i) {
-  let arr1 = arr.slice(0, i);
-  let arr2 = arr.slice(i + 1, arr.length);
-  arr = arr1 + arr2;
-  console.log(arr1);
-  console.log(arr2);
-  console.log(arr);
 }
