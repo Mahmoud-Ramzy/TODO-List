@@ -6,6 +6,7 @@ let todos = JSON.parse(localStorage.getItem("todo-list"));
 let editID;
 let isEdited = false;
 
+let bell = new Audio("./Bell.mp3");
 function showTODO() {
   let li = "";
   document.getElementById("all").classList.add("active");
@@ -48,6 +49,7 @@ function updateState(selected) {
   //Get the paragraph where the name of task is saved to make it deleted
   let taskName = selected.parentElement.lastElementChild;
   if (selected.checked) {
+    bell.play();
     taskName.classList.add("checked");
     todos[selected.id].state = "completed";
     console.log(taskName);
