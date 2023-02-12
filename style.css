@@ -223,7 +223,7 @@ li {
 }
 
 .checked {
-    color: red;
+    color: #458ab3;
     text-decoration: line-through;
 }
 
